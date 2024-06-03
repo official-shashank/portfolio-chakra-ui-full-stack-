@@ -14,11 +14,11 @@ root.render(
    <ChakraProvider theme={theme}>
    <ColorModeScript />
    <Auth0Provider
-     domain="dev-81gc3cr1p1yoacyb.us.auth0.com"
-     clientId="j9bmPCDQrS29wyBFV1lbK4LClGRLzAyv"
-     authorizationParams={{
-       redirect_uri: window.location.origin
-     }}
+    domain="dev-81gc3cr1p1yoacyb.us.auth0.com"
+    clientId="0AJxHDtUTdNNR4KCbZy1KrifD8WBtrx2"
+    authorizationParams={{
+      redirect_uri: window.location.origin
+    }}
   >
 
     <App />

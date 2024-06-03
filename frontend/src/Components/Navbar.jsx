@@ -7,38 +7,36 @@ import {
   CloseButton,
   Flex,
   HStack,
-
   Icon,
   useColorModeValue,
   Drawer,
   DrawerContent,
   Text,
   useDisclosure,
-
-
 } from '@chakra-ui/react';
 import {
   FiHome,
-  FiTrendingUp,
-  FiCompass,
+  FiInfo,
+  FiBarChart2,
+  FiFolder,
+  FiPhone,
   FiStar,
-  FiSettings,
+  FiBook,
   FiMenu,
   FiBell,
-
 } from 'react-icons/fi';
-
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import { useAuth0 } from '@auth0/auth0-react';
 import LoginButton from '../Pages/Login/Login';
+
 const LinkItems = [
   { name: 'Home', icon: FiHome, to: '/' },
-  { name: 'About', icon: FiTrendingUp, to: '/about' },
-  { name: 'Skills', icon: FiTrendingUp, to: '/skills' },
-  { name: 'Projects', icon: FiTrendingUp, to: '/projects' },
-  { name: 'Contact', icon: FiCompass, to: '/contact' },
+  { name: 'About', icon: FiInfo, to: '/about' },
+  { name: 'Skills', icon: FiBarChart2, to: '/skills' },
+  { name: 'Projects', icon: FiFolder, to: '/projects' },
+  { name: 'Contact', icon: FiPhone, to: '/contact' },
   { name: 'Services', icon: FiStar, to: '/services' },
-  { name: 'Blogs', icon: FiSettings, to: '/blogs' },
+  { name: 'Blogs', icon: FiBook, to: '/blogs' },
 ];
 
 const Navbar = ({ children }) => {
@@ -46,7 +44,7 @@ const Navbar = ({ children }) => {
   return (
     <Box minH="100vh" bg={useColorModeValue('gray.100', 'gray.900')}>
       <SidebarContent
-        onClose={() => onClose}
+        onClose={onClose}
         display={{ base: 'none', md: 'block' }}
       />
       <Drawer
@@ -72,6 +70,7 @@ const Navbar = ({ children }) => {
 };
 
 const SidebarContent = ({ onClose, ...rest }) => {
+  const { isAuthenticated } = useAuth0();
   return (
     <Box
       transition="3s ease"
@@ -84,21 +83,20 @@ const SidebarContent = ({ onClose, ...rest }) => {
       {...rest}
     >
       <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold">
-          
-        </Text>
+        <Text fontSize="2xl" fontFamily="monospace" fontWeight="bold"></Text>
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
-      {LinkItems.map((link,index) => (
-        
-          <NavItem key={index} icon={link.icon} onClick={onClose}>
-            <Link to={link.to}>
-
-            {link.name}
-            </Link>
-          </NavItem>
-     
+      {LinkItems.map((link, index) => (
+        <NavItem key={index} icon={link.icon} onClick={onClose}>
+          <Link to={link.to}>{link.name}</Link>
+        </NavItem>
       ))}
+
+      {isAuthenticated && (
+        <NavItem onClick={onClose}>
+          <Link to={'/dashboard'}>Dashboard</Link>
+        </NavItem>
+      )}
     </Box>
   );
 };
@@ -120,6 +118,7 @@ const NavItem = ({ icon, children, ...rest }) => {
         _hover={{
           bg: 'cyan.400',
           color: 'white',
+          boxShadow: 'md',
         }}
         {...rest}
       >
@@ -141,10 +140,9 @@ const NavItem = ({ icon, children, ...rest }) => {
 
 const MobileNav = ({ onOpen, ...rest }) => {
   const { user, isAuthenticated } = useAuth0();
-  useEffect(()=>{
-    console.log("This is isAuthenticatd",isAuthenticated);
-
-  })
+  useEffect(() => {
+    console.log('This is isAuthenticatd', isAuthenticated);
+  });
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -165,10 +163,8 @@ const MobileNav = ({ onOpen, ...rest }) => {
         icon={<FiMenu />}
       />
 
-    
-
       <HStack spacing={{ base: '0', md: '6' }}>
-        <ColorModeSwitcher/>
+        <ColorModeSwitcher />
         <IconButton
           size="lg"
           variant="ghost"
@@ -176,19 +172,11 @@ const MobileNav = ({ onOpen, ...rest }) => {
           icon={<FiBell />}
         />
         <Flex alignItems={'center'}>
-         {
-
-          isAuthenticated ? (
-            <Avatar
-              size="sm"
-              name={user.name}
-              src={user.picture}
-            />
-          ):(
-           <LoginButton/>
-          )
-         }
-       
+          {isAuthenticated ? (
+            <Avatar size="sm" name={user.name} src={user.picture} />
+          ) : (
+            <LoginButton />
+          )}
         </Flex>
       </HStack>
     </Flex>

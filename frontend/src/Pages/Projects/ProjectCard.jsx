@@ -9,104 +9,114 @@ import {
   Link,
   Stack,
   Text,
+  position,
   useColorModeValue,
 } from '@chakra-ui/react';
 import { FaExternalLinkAlt } from 'react-icons/fa';
+import ThreeScene from './ThreeScene'; // Import the Three.js component
 
-const ProjectCard = () => {
+const ProjectCard = ({ project }) => {
   return (
-    <Center py={6} margin={'auto'} >
+    <Center py={6} margin={'auto'} position="relative">
+      <ThreeScene style={{position:"relative",zIndex:"100"}} /> {/* Add the Three.js scene here */}
       <Stack
         borderWidth="1px"
-        borderRadius={'50px'}
-        w={{ sm: '100%', md: '540px' }}
-        height={{ sm: '476px', md: '20rem' }}
+        borderRadius={'xl'}
+        w={{ base: '90%', md: '540px' }}
         direction={{ base: 'column', md: 'row' }}
         bg={useColorModeValue('white', 'gray.900')}
-        boxShadow="2xl"
+        boxShadow="lg"
         padding={4}
+        position="relative" // Ensure the stack is positioned relative to the parent
+        zIndex={1} // Ensure the content is above the Three.js scene
       >
-        <Flex flex={1} bg="blue.200" borderRadius={'100px'}>
+        <Flex
+          flex={{ base: 1, md: 1 }}
+          borderRadius="xl"
+          transition="all 0.3s"
+          _hover={{
+            transform: 'scale(1.05)',
+            shadow: 'xl',
+          }}
+        >
           <Image
-          borderRadius={'100px'}
+            borderRadius="xl"
             objectFit="cover"
             boxSize="100%"
-            src="https://w7.pngwing.com/pngs/309/748/png-transparent-microsoft-project-2010-project-portfolio-management-microsoft-text-logo-microsoft-thumbnail.png"
+            src={project.imageUrls[0]}
+            alt={project.name}
           />
         </Flex>
         <Stack
-          flex={1}
+          flex={{ base: 1, md: 1 }}
           flexDirection="column"
           justifyContent="center"
-          alignItems="center"
-          p={1}
-          pt={2}
+          alignItems="flex-start"
+          p={4}
         >
-          <Heading fontSize="2xl" fontFamily="body">
-            Project Name
+          <Heading
+            fontSize={{ base: 'xl', md: '2xl' }}
+            fontFamily="body"
+            mb={2}
+          >
+            {project.name}
           </Heading>
-          <Text fontWeight={600} color="gray.500" size="sm" mb={4}>
-            By : - Project Team Name
+          <Text fontWeight={600} color="gray.600" size="sm" mb={4}>
+            By: {project.teamMembers.join(', ')}
           </Text>
-          <Text
-            textAlign="center"
-            color={useColorModeValue('gray.700', 'gray.400')}
-            px={3}
-          >
-            About
-            <Link href="#" color="blue.400">
-              #tag
-            </Link>
-            me in your posts
+          <Text color="gray.700" mb={4}>
+            {project.description.substring(0, 100)}
           </Text>
-          <Stack align="center" justify="center" direction="row" mt={6}>
-            <Badge
-              px={2}
-              py={1}
-              bg={useColorModeValue('gray.50', 'gray.800')}
-              fontWeight="400"
-            >
-              Technology used
-            </Badge>
+          <Stack direction="row" flexWrap="wrap">
+            {project.tags.map(tag => (
+              <Badge key={tag} colorScheme="blue" mb={2} mr={2}>
+                {tag}
+              </Badge>
+            ))}
           </Stack>
-          <Stack
-            width="100%"
-            mt="2rem"
-            direction="row"
-            padding={2}
-            justifyContent="space-between"
-            alignItems="center"
-          >
+          <Stack direction="row" mt={4} spacing={4}>
             <Button
-              flex={1}
               fontSize="sm"
               rounded="full"
-              _focus={{
-                bg: 'gray.200',
+              bg="blue.400"
+              color="white"
+              _hover={{
+                bg: 'blue.500',
               }}
-              gap={'10px'}
+              as={Link}
+              href={project.livePreviewLink}
+              _focus={{
+                bg: 'blue.500',
+                transform: 'translateY(-2px)',
+                boxShadow: 'lg',
+              }}
+              leftIcon={<FaExternalLinkAlt />}
+              transition="all 0.3s"
             >
-              <FaExternalLinkAlt /> Live Preview
+              Live Preview
             </Button>
-            <a href="www.google.com">
-              <Button
-                flex={1}
-                fontSize="sm"
-                rounded="full"
-                bg="blue.400"
-                color="white"
-                boxShadow="0px 1px 25px -5px rgb(66 153 225 / 48%), 0 10px 10px -5px rgb(66 153 225 / 43%)"
-                _hover={{
-                  bg: 'blue.500',
-                }}
-                _focus={{
-                  bg: 'blue.500',
-                }}
-                gap={'10px'}
-              >
-                <FaExternalLinkAlt /> GitHub
-              </Button>
-            </a>
+            <Button
+              fontSize="sm"
+              rounded="full"
+              bg="gray.700"
+              color="white"
+              _hover={{
+                bg: 'gray.800',
+              }}
+              _focus={{
+                bg: 'gray.800',
+                transform: 'translateY(-2px)',
+                boxShadow: 'lg',
+              }}
+              leftIcon={<FaExternalLinkAlt />}
+              as={Link}
+              href={project.githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              transition="all 0.3s"
+            >
+              GitHub
+            </Button>
           </Stack>
         </Stack>
       </Stack>

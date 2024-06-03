@@ -1,20 +1,20 @@
-import { useAuth0 } from '@auth0/auth0-react';
-import React from 'react';
+import { useAuth0 } from '@auth0/auth0-react'
+import { Button } from '@chakra-ui/react'
+import React from 'react'
 
-const LoginButton = () => {
-  const { loginWithRedirect, isAuthenticated, logout } = useAuth0();
+const Login = () => {
+const {loginWithRedirect} =useAuth0();
 
-  return isAuthenticated ? (
-    <button
-      onClick={() =>
-        logout({ logoutParams: { returnTo: window.location.origin } })
-      }
-    >
-      Log Out
-    </button>
-  ) : (
-    <button onClick={() => loginWithRedirect()}>Log In</button>
-  );
-};
 
-export default LoginButton;
+  return (
+    <div>
+     <Button onClick={() => loginWithRedirect()}>
+      Login
+     </Button>
+     
+
+    </div>
+  )
+}
+
+export default Login

@@ -16,10 +16,7 @@ const projectSchema = new mongoose.Schema({
   tags: {
     type: [String],
   },
-  technologyUsed: {
-    type: String,
-    required: true,
-  },
+  technologyUsed: [{ type: String, required: true }], 
   livePreviewLink: {
     type: String,
   },
