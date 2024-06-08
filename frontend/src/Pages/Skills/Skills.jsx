@@ -84,11 +84,11 @@ const Skills = () => {
   const [experience, setExperience] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/v1/skills').then(data => {
+    axios.get('/api/v1/skills').then(data => {
       console.log('This is skills data', data);
       setSkills(data.data);
     });
-    axios.get('http://localhost:5000/api/v1/experiences').then(data => {
+    axios.get('/api/v1/experiences').then(data => {
       console.log('This is skills data', data);
       setExperience(data.data);
     });
