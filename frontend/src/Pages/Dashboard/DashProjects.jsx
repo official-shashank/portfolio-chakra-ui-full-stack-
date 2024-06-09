@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../../config/axiosConfig.js";
 import {
   Box,
   Button,
@@ -284,7 +284,7 @@ const DashProjects = () => {
 
   const fetchProjects = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/v1/projects/getallprojects");
+      const response = await axios.get("/api/v1/projects/getallprojects");
       const fetchedProjects = response.data.map(project => ({
         ...project,
         technologyUsed: Array.isArray(project.technologyUsed) ? project.technologyUsed : [],

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; // Import axios for making HTTP requests
+import axios from '../../config/axiosConfig.js'; // Import axios for making HTTP requests
 
 import Navbar from '../../Components/Navbar';
 import ProjectCard from './ProjectCard';
@@ -16,7 +16,7 @@ export default function Projects() {
 
   const fetchProjects = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/v1/projects/getallprojects');
+      const response = await axios.get('/api/v1/projects/getallprojects');
       setProjects(response.data);
       setFilteredProjects(response.data); // Initially set filtered projects to all projects
     } catch (error) {

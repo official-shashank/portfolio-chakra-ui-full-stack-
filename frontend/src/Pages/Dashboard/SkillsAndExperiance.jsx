@@ -20,7 +20,7 @@ import {
   useDisclosure,
   Grid,
 } from '@chakra-ui/react';
-import axios from 'axios';
+import axios from '../../config/axiosConfig.js';
 import Navbar from '../../Components/Navbar';
 
 const SkillsAndExperiance = () => {
@@ -30,7 +30,7 @@ const SkillsAndExperiance = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const fetchSkills = async () => {
-    const response = await axios.get('http://localhost:5000/api/v1/skills');
+    const response = await axios.get('/api/v1/skills');
     setSkills(response.data);
   };
 
