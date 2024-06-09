@@ -42,10 +42,10 @@ import {
 import { FiDatabase } from 'react-icons/fi';
 import { AiFillApi, AiOutlineAntDesign } from 'react-icons/ai';
 import { GrMysql } from 'react-icons/gr';
-import axios from 'axios';
+
 import { motion } from 'framer-motion';
 import Navbar from '../../Components/Navbar';
-
+import axios from '../../config/axiosConfig.js';
 const skills = [
   { name: 'React', icon: FaReact },
   { name: 'Node.js', icon: FaNodeJs },
