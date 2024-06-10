@@ -276,6 +276,12 @@ const DashProjects = () => {
   const [editIndex, setEditIndex] = useState(null);
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+   if(!token){
+    window.location.href = "/dashboard";
+     return;
+   }
+
     fetchProjects();
   }, []);
 

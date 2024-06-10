@@ -35,6 +35,11 @@ const SkillsAndExperiance = () => {
   };
 
   const fetchExperiences = async () => {
+    const token = localStorage.getItem("token");
+    if(!token){
+     window.location.href = "/dashboard";
+      return;
+    }
     const response = await axios.get(
       'http://localhost:5000/api/v1/experiences'
     );
