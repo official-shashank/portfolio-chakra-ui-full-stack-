@@ -26,8 +26,6 @@ import {
   FiBell,
 } from 'react-icons/fi';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
-import { useAuth0 } from '@auth0/auth0-react';
-import LoginButton from '../Pages/Login/Login';
 
 const LinkItems = [
   { name: 'Home', icon: FiHome, to: '/' },
@@ -70,7 +68,7 @@ const Navbar = ({ children }) => {
 };
 
 const SidebarContent = ({ onClose, ...rest }) => {
-  const { isAuthenticated } = useAuth0();
+
   return (
     <Box
       transition="3s ease"
@@ -92,11 +90,11 @@ const SidebarContent = ({ onClose, ...rest }) => {
         </NavItem>
       ))}
 
-      {isAuthenticated && (
+   
         <NavItem onClick={onClose}>
           <Link to={'/dashboard'}>Dashboard</Link>
         </NavItem>
-      )}
+
     </Box>
   );
 };
@@ -139,10 +137,8 @@ const NavItem = ({ icon, children, ...rest }) => {
 };
 
 const MobileNav = ({ onOpen, ...rest }) => {
-  const { user, isAuthenticated } = useAuth0();
-  useEffect(() => {
-    console.log('This is isAuthenticatd', isAuthenticated);
-  });
+
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -171,13 +167,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
           aria-label="open menu"
           icon={<FiBell />}
         />
-        <Flex alignItems={'center'}>
-          {isAuthenticated ? (
-            <Avatar size="sm" name={user.name} src={user.picture} />
-          ) : (
-            <LoginButton />
-          )}
-        </Flex>
+        
       </HStack>
     </Flex>
   );

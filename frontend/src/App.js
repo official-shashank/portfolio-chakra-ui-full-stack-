@@ -4,8 +4,6 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Loader from './Components/Loader';
 import Dashboard from './Pages/Dashboard/Dashboard';
 
-
-
 const Home = lazy(() => import('./Pages/Home/Home'));
 const About = lazy(() => import('./Pages/About/About'));
 const Contact = lazy(() => import('./Pages/Contact/Contact'));
@@ -15,6 +13,8 @@ const Services = lazy(() => import('./Pages/Services/Services'));
 const Projects = lazy(() => import('./Pages/Projects/Projects'));
 const DashProjects = lazy(() => import('./Pages/Dashboard/DashProjects'))
 const SkillsAndExperiance = lazy(() => import('./Pages/Dashboard/SkillsAndExperiance'))
+const LoginForm = lazy(() => import('./Components/LoginForm'));
+
 
 
 const App = () => {
@@ -29,6 +29,7 @@ const App = () => {
           <Route path="/skills" element={<Skills />} />
           <Route path="/services" element={<Services />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path='/login' element={<LoginForm/>}/>
           <Route
             path="/dashboard"
             element={<Dashboard />}
@@ -41,6 +42,7 @@ const App = () => {
             path="/dashboard/skillsandexperiance"
             element={<SkillsAndExperiance />}
           />
+        
         </Routes>
       </Suspense>
     </Router>
