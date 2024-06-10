@@ -41,7 +41,7 @@ const SkillsAndExperiance = () => {
       return;
     }
     const response = await axios.get(
-      'http://localhost:5000/api/v1/experiences'
+      '/api/v1/experiences'
     );
     setExperiences(response.data);
   };
