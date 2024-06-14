@@ -34,7 +34,7 @@ const LinkItems = [
   { name: 'Projects', icon: FiFolder, to: '/projects' },
   { name: 'Contact', icon: FiPhone, to: '/contact' },
   { name: 'Services', icon: FiStar, to: '/services' },
-  { name: 'Blogs', icon: FiBook, to: '/blogs' },
+  // { name: 'Blogs', icon: FiBook, to: '/blogs' },
 ];
 
 const Navbar = ({ children }) => {
